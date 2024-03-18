@@ -6,11 +6,11 @@ exports.Color = void 0;
  */
 var Color;
 (function (Color) {
-    Color["White"] = "blanco";
-    Color["Blue"] = "azul";
-    Color["Black"] = "negro";
-    Color["Red"] = "rojo";
-    Color["Green"] = "verde";
-    Color["Nocolor"] = "incoloro";
-    Color["Multicolor"] = "multicolor";
+  Color["White"] = "blanco";
+  Color["Blue"] = "azul";
+  Color["Black"] = "negro";
+  Color["Red"] = "rojo";
+  Color["Green"] = "verde";
+  Color["Nocolor"] = "incoloro";
+  Color["Multicolor"] = "multicolor";
 })(Color || (exports.Color = Color = {}));

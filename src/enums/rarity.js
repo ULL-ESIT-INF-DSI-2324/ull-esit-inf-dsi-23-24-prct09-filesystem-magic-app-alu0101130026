@@ -6,8 +6,8 @@ exports.Rarity = void 0;
  */
 var Rarity;
 (function (Rarity) {
-    Rarity["Common"] = "comun";
-    Rarity["Infrequent"] = "infrecuente";
-    Rarity["Rare"] = "rara";
-    Rarity["Mythic"] = "mitica";
+  Rarity["Common"] = "comun";
+  Rarity["Infrequent"] = "infrecuente";
+  Rarity["Rare"] = "rara";
+  Rarity["Mythic"] = "mitica";
 })(Rarity || (exports.Rarity = Rarity = {}));
