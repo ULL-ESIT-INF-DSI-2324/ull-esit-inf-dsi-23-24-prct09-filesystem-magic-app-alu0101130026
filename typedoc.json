@@ -1,0 +1,16 @@
+{
+  "entryPoints": [
+    "./src/main.ts",
+    "./src/interfaces/customer.ts",
+    "./src/interfaces/furniture.ts",
+    "./src/interfaces/supplier.ts",
+    "./src/interfaces/operations.ts",
+    "./src/interfaces/transaction.ts",
+    "./src/stock.ts",
+    "./src/customerOperations.ts",
+    "./src/furnitureOperations.ts",
+    "./src/supplierOperations.ts"
+  ],
+
+  "out": "./docs"
+}
