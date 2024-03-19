@@ -3,7 +3,7 @@
  */
 export enum Type {
   Ground = "tierra",
-  Criatura = "criatura",
+  Creature = "criatura",
   Enchantment = "encantamiento",
   Spell = "conjuro",
   Instantaneous = "instantaneo",

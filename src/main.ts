@@ -127,7 +127,9 @@ yargs(hideBin(process.argv))
   })
   .help().argv;
 
-// Definir el comando 'modificar' y su manejador
+/**
+ * Comando para modificar una carta de la colección
+ */
 yargs(hideBin(process.argv))
   .command({
     command: "modificar",
@@ -140,10 +142,23 @@ yargs(hideBin(process.argv))
       },
       id: { type: "number", demandOption: true, describe: "ID de la carta" },
       nombre: { type: "string", describe: "Nuevo nombre de la carta" },
-      // Define más opciones para modificar aquí...
+      manaCost: { type: "number", describe: "Nuevo coste de mana de la carta" },
+      color: { type: "string", describe: "Nuevo color de la carta" },
+      type: { type: "string", describe: "Nuevo tipo de la carta" },
+      rarity: { type: "string", describe: "Nueva rareza de la carta" },
+      rules: { type: "string", describe: "Nuevas reglas de la carta" },
+      strength: { type: "number", describe: "Nueva fuerza de la carta" },
+      resistance: { type: "number", describe: "Nueva resistencia de la carta" },
+      loyaltyMarks: {
+        type: "number",
+        describe: "Nuevas marcas de lealtad de la carta",
+      },
+      marketValue: {
+        type: "number",
+        describe: "Nuevo valor de mercado de la carta",
+      },
     },
     handler: (args) => {
-      // Implementa la lógica para modificar una carta
       const directorio = `./${args.usuario}`;
       const archivo = `${directorio}/${args.id}.json`;
       if (fs.existsSync(archivo)) {
@@ -152,7 +167,34 @@ yargs(hideBin(process.argv))
         if (args.nombre) {
           carta.nombre = args.nombre;
         }
-        // Modifica los demás campos aquí...
+        if (args.manaCost) {
+          carta.manaCost = args.manaCost;
+        }
+        if (args.color) {
+          carta.color = args.color;
+        }
+        if (args.type) {
+          carta.type = args.type;
+        }
+        if (args.rarity) {
+          carta.rarity = args.rarity;
+        }
+        if (args.rules) {
+          carta.rules = args.rules;
+        }
+        if (args.strength) {
+          carta.strength = args.strength;
+        }
+        if (args.resistance) {
+          carta.resistance = args.resistance;
+        }
+        if (args.loyaltyMarks) {
+          carta.loyaltyMarks = args.loyaltyMarks;
+        }
+        if (args.marketValue) {
+          carta.marketValue = args.marketValue;
+        }
+
         fs.writeFileSync(archivo, JSON.stringify(carta));
         console.log(chalk.green("Carta modificada correctamente."));
       } else {
@@ -162,7 +204,9 @@ yargs(hideBin(process.argv))
   })
   .help().argv;
 
-// Define el comando 'eliminar' y su manejador
+/**
+ * Comando para eliminar una carta de la colección
+ */
 yargs(hideBin(process.argv))
   .command({
     command: "eliminar",
@@ -176,7 +220,6 @@ yargs(hideBin(process.argv))
       id: { type: "number", demandOption: true, describe: "ID de la carta" },
     },
     handler: (args) => {
-      // Implementa la lógica para eliminar una carta
       const directorio = `./${args.usuario}`;
       const archivo = `${directorio}/${args.id}.json`;
       if (fs.existsSync(archivo)) {
@@ -189,7 +232,9 @@ yargs(hideBin(process.argv))
   })
   .help().argv;
 
-// Define el comando 'listar' y su manejador
+/**
+ * Comando para listar las cartas de la colección
+ */
 yargs(hideBin(process.argv))
   .command({
     command: "listar",
@@ -202,7 +247,6 @@ yargs(hideBin(process.argv))
       },
     },
     handler: (args) => {
-      // Implementa la lógica para listar las cartas
       const directorio = `./${args.usuario}`;
       if (fs.existsSync(directorio)) {
         // Esto no debería ser así
@@ -223,7 +267,9 @@ yargs(hideBin(process.argv))
   })
   .help().argv;
 
-// Define el comando 'mostrar' y su manejador
+/**
+ * Comando para mostrar la información de una carta
+ */
 yargs(hideBin(process.argv))
   .command({
     command: "mostrar",
@@ -237,7 +283,6 @@ yargs(hideBin(process.argv))
       id: { type: "number", demandOption: true, describe: "ID de la carta" },
     },
     handler: (args) => {
-      // Implementa la lógica para mostrar información de una carta
       const directorio = `./${args.usuario}`;
       const archivo = `${directorio}/${args.id}.json`;
       if (fs.existsSync(archivo)) {
@@ -253,5 +298,4 @@ yargs(hideBin(process.argv))
   })
   .help().argv;
 
-// Parsea los argumentos de la línea de comandos
 yargs(hideBin(process.argv)).parse();
