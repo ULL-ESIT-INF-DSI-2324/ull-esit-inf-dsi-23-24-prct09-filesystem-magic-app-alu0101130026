@@ -2,7 +2,7 @@
     "name": "ull-esit-inf-dsi-23-24-prct09-filesystem-magic-app-alu0101130026",
     "version": "1.0.0",
     "description": "Práctica 9 de la asignatura",
-    "main": "index.js",
+    "main": "main.js",
     "type": "module",
     "scripts": {
         "start": "tsc-watch --onSuccess \"node dist/main.js\" ",

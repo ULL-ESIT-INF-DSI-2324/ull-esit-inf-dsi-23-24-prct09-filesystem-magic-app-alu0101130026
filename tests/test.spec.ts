@@ -57,7 +57,6 @@ describe("uploadCards", () => {
       marketValue: 30,
     };
 
-    // Guardar las cartas
     saveCard(usuario, carta1);
     saveCard(usuario, carta2);
 
@@ -90,13 +89,8 @@ describe("Command: añadir", () => {
       marketValue: 15,
     };
 
-    // Ejecutar el comando "añadir"
-    // Asumiendo que la lógica de manejo de comandos se implementa en el archivo principal
-    // Ejecutamos el handler directamente con los argumentos
-    // handler(args);
     saveCard(usuario, args);
 
-    // Verificar si la carta se ha guardado correctamente
     const filePath = `./${usuario.name}/${args.id}.json`;
     const fileContent = fs.readFileSync(filePath, "utf-8");
     const savedCard: Card = JSON.parse(fileContent);
@@ -118,21 +112,10 @@ describe("Command: eliminar", () => {
       rules: "Test rules",
       marketValue: 10,
     };
-
     saveCard(usuario, carta);
-
     const filePath = `./${usuario.name}/${carta.id}.json`;
-
-    // Verificar que la carta existe antes de eliminarla
     expect(fs.existsSync(filePath)).to.be.true;
-
-    // Ejecutar el comando "eliminar"
-    // Asumiendo que la lógica de manejo de comandos se implementa en el archivo principal
-    // Ejecutamos el handler directamente con los argumentos
-    // handler(args);
     fs.unlinkSync(filePath);
-
-    // Verificar que la carta ha sido eliminada
     expect(fs.existsSync(filePath)).to.be.false;
   });
 });
@@ -152,12 +135,6 @@ describe("Command: mostrar", () => {
     };
 
     saveCard(usuario, carta);
-
-    // Asumiendo que la lógica de manejo de comandos se implementa en el archivo principal
-    // Ejecutamos el handler directamente con los argumentos
-    // handler(args);
-    // Aquí esperamos que el comando muestre la información de la carta guardada
-    // Puedes verificar la salida del comando en la consola o en otro medio que utilices para mostrar la información
   });
 });
 
@@ -187,12 +164,6 @@ describe("Command: listar", () => {
 
     saveCard(usuario, carta1);
     saveCard(usuario, carta2);
-
-    // Asumiendo que la lógica de manejo de comandos se implementa en el archivo principal
-    // Ejecutamos el handler directamente con los argumentos
-    // handler(args);
-    // Aquí esperamos que el comando liste todas las cartas en la colección del usuario
-    // Puedes verificar la salida del comando en la consola o en otro medio que utilices para mostrar la lista de cartas
   });
 });
 
@@ -215,11 +186,5 @@ describe("Command: modificar", () => {
     const newCardName = "newTestCardName";
     const newManaCost = 3;
     const newColor = "Blue";
-
-    // Asumiendo que la lógica de manejo de comandos se implementa en el archivo principal
-    // Ejecutamos el handler directamente con los argumentos
-    // handler(args);
-    // Aquí esperamos que el comando modifique la carta específica con los nuevos valores
-    // Puedes verificar la carta modificada directamente en la colección del usuario o a través de la función uploadCards
   });
 });
