@@ -8,10 +8,18 @@
 
 ## Datos identificativos
 
+- Diego Díaz Fernández
+- alu0101130026@ull.edu.es
+
 ## Objetivos
 
 ## Sesión PE
 
+En la novena semana de la asignatura, se nos pide desarrollar
+
 ## Conclusiones
 
 ## Bibliografía
+
+- http://yargs.js.org/
+- https://www.npmjs.com/package/chalk

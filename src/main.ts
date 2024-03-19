@@ -22,7 +22,11 @@ export function saveCard(usuario: User, carta: Card) {
   fs.writeFileSync(archivo, JSON.stringify(carta));
 }
 
-// Función para cargar las cartas de un usuario desde archivos JSON
+/**
+ * Función para cargar las cartas de un usuario desde un archivo JSON
+ * @param usuario Usuario
+ * @returns Cartas del usuario
+ */
 export function uploadCards(usuario: User): Card[] {
   const directorio = `./${usuario.name}`;
   if (!fs.existsSync(directorio)) {
@@ -248,9 +252,8 @@ yargs(hideBin(process.argv))
     },
     handler: (args) => {
       const directorio = `./${args.usuario}`;
-      if (fs.existsSync(directorio)) {
-        // Esto no debería ser así
-        const archivos = fs.readdirSync(directorio);
+      const archivos = fs.readdirSync(directorio);
+      if (archivos.length > 0) {
         console.log(chalk.green("Cartas en la colección:"));
         archivos.forEach((archivo) => {
           const contenido = fs.readFileSync(
@@ -290,7 +293,19 @@ yargs(hideBin(process.argv))
         const carta: Card = JSON.parse(contenido);
         console.log(chalk.green("Información de la carta:"));
         console.log(chalk.yellow(`Nombre: ${carta.nombre}`));
-        // Muestra los demás campos aquí...
+        console.log(chalk.yellow(`Coste de mana: ${carta.manaCost}`));
+        console.log(chalk.yellow(`Color: ${carta.color}`));
+        console.log(chalk.yellow(`Tipo: ${carta.type}`));
+        console.log(chalk.yellow(`Rareza: ${carta.rarity}`));
+        console.log(chalk.yellow(`Reglas: ${carta.rules}`));
+        if (carta.strength !== undefined)
+          // Comprobamos en caso de que la propiedad sea opcional
+          console.log(chalk.yellow(`Fuerza: ${carta.strength}`));
+        if (carta.resistance !== undefined)
+          console.log(chalk.yellow(`Resistencia: ${carta.resistance}`));
+        if (carta.loyaltyMarks !== undefined)
+          console.log(chalk.yellow(`Marcas de lealtad: ${carta.loyaltyMarks}`));
+        console.log(chalk.yellow(`Valor de mercado: ${carta.marketValue}`));
       } else {
         console.log(chalk.red("No se encontró ninguna carta con ese ID."));
       }

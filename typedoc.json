@@ -5,7 +5,7 @@
     "./src/interfaces/user.ts",
     "./src/enums/color.ts",
     "./src/enums/rarity.ts",
-    "./src/enums/type.ts",
+    "./src/enums/type.ts"
   ],
 
   "out": "./docs"
