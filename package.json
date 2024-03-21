@@ -5,7 +5,7 @@
     "main": "main.js",
     "type": "module",
     "scripts": {
-        "start": "tsc-watch --onSuccess \"node dist/main.js\" ",
+        "start": "tsc-watch --onSuccess \"node dist/gestor.js\" ",
         "doc": "typedoc",
         "coverage": "c8 npm test && c8 report --reporter=lcov",
         "test": "mocha"

@@ -1,6 +1,7 @@
 {
   "entryPoints": [
     "./src/main.ts",
+    "./src/gestor.ts",
     "./src/interfaces/card.ts",
     "./src/interfaces/user.ts",
     "./src/enums/color.ts",

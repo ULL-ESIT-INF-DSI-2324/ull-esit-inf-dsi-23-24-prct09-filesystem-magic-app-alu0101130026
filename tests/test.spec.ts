@@ -30,6 +30,8 @@ describe("saveCard", () => {
     const savedCard: Card = JSON.parse(fileContent);
 
     expect(savedCard).to.deep.equal(carta);
+    fs.unlinkSync(filePath);
+    fs.rmdirSync(usuario.name);
   });
 });
 
@@ -63,6 +65,9 @@ describe("uploadCards", () => {
     const uploadedCards: Card[] = uploadCards(usuario);
 
     expect(uploadedCards).to.deep.include.members([carta1, carta2]);
+    fs.unlinkSync(`${usuario.name}/${carta1.id}.json`);
+    fs.unlinkSync(`${usuario.name}/${carta2.id}.json`);
+    fs.rmdirSync(usuario.name);
   });
 
   it("should return an empty array if the user directory does not exist", () => {
@@ -96,6 +101,8 @@ describe("Command: añadir", () => {
     const savedCard: Card = JSON.parse(fileContent);
 
     expect(savedCard).to.deep.equal(args);
+    fs.unlinkSync(`${usuario.name}/${args.id}.json`);
+    fs.rmdirSync(usuario.name);
   });
 });
 
@@ -117,6 +124,7 @@ describe("Command: eliminar", () => {
     expect(fs.existsSync(filePath)).to.be.true;
     fs.unlinkSync(filePath);
     expect(fs.existsSync(filePath)).to.be.false;
+    fs.rmdirSync(usuario.name);
   });
 });
 
@@ -135,6 +143,8 @@ describe("Command: mostrar", () => {
     };
 
     saveCard(usuario, carta);
+    fs.unlinkSync(`${usuario.name}/${carta.id}.json`);
+    fs.rmdirSync(usuario.name);
   });
 });
 
@@ -164,6 +174,9 @@ describe("Command: listar", () => {
 
     saveCard(usuario, carta1);
     saveCard(usuario, carta2);
+    fs.unlinkSync(`${usuario.name}/${carta1.id}.json`);
+    fs.unlinkSync(`${usuario.name}/${carta2.id}.json`);
+    fs.rmdirSync(usuario.name);
   });
 });
 
@@ -186,5 +199,7 @@ describe("Command: modificar", () => {
     const newCardName = "newTestCardName";
     const newManaCost = 3;
     const newColor = "Blue";
+    fs.unlinkSync(`${usuario.name}/${carta.id}.json`);
+    fs.rmdirSync(usuario.name);
   });
 });
