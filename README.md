@@ -265,6 +265,100 @@ private isJSONFormat(data: string): boolean {
 
 Al final del main se ha incluido un ejemplo con unos hooks personalizados, definiendo los métodos pre y post Process.
 
+## Sesión PE Semana 11
+
+En esta semana se nos pedía, sobre esta práctica ya realizada, cambiar dos de los métodos para que se sustituya en los mismos la invocación de métodos del API síncrona de Node.js de gestión el sistema de ficheros, por llamadas a los métodos equivalentes del API asíncrona basada en callbacks. Además teníamos que seguir el patrón callback. Se desarrollaron los cambios sobre saveCard y uploadCard, de la siguiente manera: 
+
+```
+export const saveCard = (
+  usuario: User,
+  carta: Card,
+  callback: (error: string | undefined) => void,
+) => {
+  const directorio = `./${usuario.name}`;
+  fs.access(directorio, (err) => {
+    if (err) {
+      if (err.code === "ENOENT") {
+        fs.mkdir(directorio, (err) => {
+          if (err) {
+            callback(err.message);
+          } else {
+            guardarArchivo();
+          }
+        });
+      } else {
+        callback(err.message);
+      }
+    } else {
+      guardarArchivo();
+    }
+  });
+
+  function guardarArchivo() {
+    const archivo = `${directorio}/${carta.id}.json`;
+    request(
+      { url: archivo, body: JSON.stringify(carta) },
+      (error, response, body) => {
+        if (error) {
+          callback(error.message);
+        } else if (response.statusCode !== 200) {
+          callback(`Error: ${response.statusCode} - ${body}`);
+        } else {
+          callback(undefined);
+        }
+      },
+    );
+  }
+};
+
+
+export const uploadCards = (
+  usuario: User,
+  callback: (error: string | undefined, cartas?: Card[]) => void,
+) => {
+  const directorio = `./${usuario.name}`;
+  fs.access(directorio, (err) => {
+    if (err) {
+      if (err.code === "ENOENT") {
+        callback(undefined, []);
+      } else {
+        callback(err.message);
+      }
+    } else {
+      fs.readdir(directorio, (err, archivos) => {
+        if (err) {
+          callback(err.message);
+        } else {
+          const cartas: Card[] = [];
+          let archivosRestantes = archivos.length;
+          if (archivosRestantes === 0) {
+            callback(undefined, cartas);
+          }
+          archivos.forEach((archivo) => {
+            fs.readFile(
+              `${directorio}/${archivo}`,
+              "utf-8",
+              (err, contenido) => {
+                if (err) {
+                  callback(err.message);
+                } else {
+                  const carta: Card = JSON.parse(contenido);
+                  cartas.push(carta);
+                  archivosRestantes--;
+                  if (archivosRestantes === 0) {
+                    callback(undefined, cartas);
+                  }
+                }
+              },
+            );
+          });
+        }
+      });
+    }
+  });
+};
+```
+
 ## Conclusiones
 
 Terminada ya la semana 9 de la asignatura, ya pasado el ecuador de la misma, hacemos retrospección y vemos que ya tenemos un amplio manejo de typescript. Empezamos definiendo funciones básicas como `Hola Mundo` y ahora somos capaces de usar yargs para pasarle por consola distintos comandos que nosotros mismos hemos diseñado.

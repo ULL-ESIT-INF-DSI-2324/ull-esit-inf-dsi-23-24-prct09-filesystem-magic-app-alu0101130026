@@ -40,7 +40,7 @@ import request from "request";
 */
 
 /**
- * Función que guarda la carta de un usuario
+ * Guarda la carta de un usuario
  * @param usuario Usuario
  * @param carta Carta a guardar
  * @param callback Callback de la función
@@ -90,7 +90,7 @@ export const saveCard = (
 };
 
 /**
- * Función que carga las cartas de un usuario
+ * Carga las cartas de un usuario
  * @param usuario Usuario
  * @param callback Callback de la función
  */
