@@ -19,6 +19,7 @@
         "@types/lowdb": "^1.0.15",
         "@types/mocha": "^10.0.6",
         "@types/prompt-sync": "^4.2.3",
+        "@types/request": "^2.48.12",
         "@types/yargs": "^17.0.32",
         "@typescript-eslint/eslint-plugin": "^7.2.0",
         "@typescript-eslint/parser": "^7.2.0",
@@ -40,6 +41,7 @@
         "lodash": "^4.17.21",
         "lowdb": "^1.0.0",
         "prompt-sync": "^4.2.0",
+        "request": "^2.88.2",
         "sinon": "^17.0.1",
         "yargs": "^17.7.2"
     }

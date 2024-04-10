@@ -9,7 +9,7 @@ import { Color } from "../src/enums/color.js";
 import { Type } from "../src/enums/type.js";
 import { Rarity } from "../src/enums/rarity.js";
 
-describe("saveCard", () => {
+/*describe("saveCard", () => {
   it("should save a card to the user directory", () => {
     const usuario: User = { name: "testUser", cards: [] };
     const carta: Card = {
@@ -79,3 +79,66 @@ describe("uploadCards", () => {
   });
 });
 
+*/
+
+describe("Funciones", () => {
+  const usuario: User = { name: "test", cards: [] };
+  const cartaEjemplo: Card = {
+    id: 1,
+    nombre: "Carta de ejemplo",
+    manaCost: 3,
+    color: Color.Blue,
+    type: Type.Enchantment,
+    rarity: Rarity.Common,
+    rules: "Texto de reglas de la carta",
+    marketValue: 10,
+  };
+
+  afterEach(() => {
+    const directorio = `./${usuario.name}`;
+    if (fs.existsSync(directorio)) {
+      fs.readdirSync(directorio).forEach((archivo) => {
+        fs.unlinkSync(`${directorio}/${archivo}`);
+      });
+      fs.rmdirSync(directorio);
+    }
+  });
+
+  describe("saveCard", () => {
+    it("debería guardar una carta correctamente", (done) => {
+      saveCard(usuario, cartaEjemplo, (error) => {
+        const archivo = `./${usuario.name}/${cartaEjemplo.id}.json`;
+        expect(fs.existsSync(archivo)).to.be.true;
+        done();
+      });
+    });
+
+    it("debería manejar errores al guardar una carta", (done) => {
+      const usuarioInvalido: User = { name: "", cards: [] };
+      saveCard(usuarioInvalido, cartaEjemplo, (error) => {
+        expect(error).to.not.be.undefined;
+        done();
+      });
+    });
+  });
+
+  describe("uploadCards", () => {
+    it("debería cargar las cartas correctamente", (done) => {
+      saveCard(usuario, cartaEjemplo, (error) => {
+        uploadCards(usuario, (error, cartas) => {
+          expect(cartas).to.have.lengthOf(1);
+          expect(cartas![0]).to.deep.equal(cartaEjemplo);
+          done();
+        });
+      });
+    });
+
+    it("debería manejar errores al cargar las cartas", (done) => {
+      const usuarioInvalido: User = { name: "", cards: [] };
+      uploadCards(usuarioInvalido, (error) => {
+        expect(error).to.not.be.undefined;
+        done();
+      });
+    });
+  });
+});

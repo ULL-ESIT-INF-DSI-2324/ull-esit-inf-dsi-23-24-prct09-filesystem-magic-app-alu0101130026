@@ -93,7 +93,15 @@ yargs(hideBin(process.argv))
         name: args.usuario,
         cards: [],
       };
-      saveCard(usuario, carta);
+
+      // Código cambiado para la modificación
+      saveCard(usuario, carta, (error) => {
+        if (error) {
+          console.error("An error ocurred when saving the card:", error);
+        } else {
+          console.log("The card was succesfully added.");
+        }
+      });
     },
   })
   .help().argv;
